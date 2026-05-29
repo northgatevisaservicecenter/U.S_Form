@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -36,15 +35,21 @@
         .submit-btn:disabled { background-color: #cccccc; }
         
         .modal-overlay { display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); backdrop-filter: blur(5px); }
-        .modal-box { background: white; margin: 15% auto; padding: 40px; border-radius: 15px; width: 85%; max-width: 400px; text-align: center; animation: slideIn 0.3s ease-out; }
+        .modal-box { background: white; margin: 12% auto; padding: 40px; border-radius: 15px; width: 85%; max-width: 400px; text-align: center; animation: slideIn 0.3s ease-out; }
         @keyframes slideIn { from { transform: translateY(-30px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
         .success-icon { font-size: 60px; color: #25D366; margin-bottom: 20px; }
+
+        /* Modal Button layout adjustments */
+        .modal-btn-group { display: flex; flex-direction: column; gap: 10px; margin-top: 25px; }
+        .home-btn { width: 100%; padding: 15px; background-color: #f0f2f5; color: #333; border: 1px solid #ccc; border-radius: 8px; font-size: 16px; font-weight: bold; cursor: pointer; transition: 0.3s ease; text-decoration: none; display: inline-block; box-sizing: border-box; }
+        .home-btn:hover { background-color: #e4e6eb; }
+        .modal-box .submit-btn { margin-top: 0; padding: 15px; font-size: 16px; }
     </style>
 </head>
 <body>
 
 <div class="form-container">
-    <div class="logo-container"><img src="logo2.png" alt="NorthGate Logo"></div>
+    <div class="logo-container"><img src="logo.png" alt="NorthGate Logo"></div>
     <div class="header">
         <p><strong>U.S VISA APPLICANT FORM</strong></p>
     </div>
@@ -112,7 +117,7 @@
                     <label class="checkbox-item"><input type="checkbox" name="visa_type" value="O extra-ordinary ability"> O extra-ordinary ability</label>
                     <label class="checkbox-item"><input type="checkbox" name="visa_type" value="P1/P2/P3"> P1/P2/P3</label>
                     <label class="checkbox-item"><input type="checkbox" name="visa_type" value="Q internationally cultural exchange visitors visa"> Q internationally cultural exchange visitors visa</label>
-                     <label class="checkbox-item"><input type="checkbox" name="visa_type" value="None"> None</label>
+                     <label class="checkbox-item"><input type="checkbox" name="visa_type" value="None"> None </label>
                 </div>
             </div>
         </div>
@@ -143,7 +148,7 @@
             
             <div class="declaration-box">
                 <input type="checkbox" id="agree" required>
-                <label for="agree">I hereby declare that all the above information provided is true and accurate to the best of my knowledge.</label>
+                <label for="agree">I hereby declare that all the above information provided is true and accurate to the best of my knowledge. I understand that providing false or misleading information may result in visa refusal.</label>
             </div>
         </div>
 
@@ -154,14 +159,18 @@
 <div id="thankYouModal" class="modal-overlay">
     <div class="modal-box">
         <div class="success-icon">✔</div>
-        <h2 style="color:#003366;">Submitted!</h2>
-        <p>Your details have been saved successfully. We will contact you soon.</p>
-        <button class="submit-btn" onclick="window.location.reload()">Fill New Form</button>
+        <h2 style="color:#003366; margin-top: 0;">Submitted!</h2>
+        <p style="color: #666; font-size: 14px;">Your details have been saved successfully. We will contact you soon.</p>
+        
+        <div class="modal-btn-group">
+            <button class="submit-btn" onclick="window.location.reload()">Fill New Form</button>
+            <a href="#" class="home-btn">Go Back to Home</a>
+        </div>
     </div>
 </div>
 
 <script>
-    const scriptURL = 'exec';
+    const scriptURL = 'https://script.google.com/macros/s/AKfycbzw8Tkcd7nf2nSJyWH98C3bsdjRBXz7SZuVAsKbf0Dz4Wu0FdnkUOqXbfLFecVu_xTDHw/exec';
     const form = document.getElementById('visaForm');
     const btn = document.getElementById('submitBtn');
 
