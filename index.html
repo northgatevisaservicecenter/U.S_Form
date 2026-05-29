@@ -1,1 +1,208 @@
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NorthGate Visa Application Form</title>
+    <style>
+        body { font-family: 'Segoe UI', Arial, sans-serif; background-color: #f0f2f5; display: flex; justify-content: center; padding: 15px; margin: 0; }
+        .form-container { background: #ffffff; max-width: 850px; width: 100%; padding: 25px; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); border-top: 10px solid #003366; margin-top: 20px; margin-bottom: 40px; }
+        .logo-container { text-align: center; margin-bottom: 20px; }
+        .logo-container img { max-width: 180px; height: auto; }
+        .header { text-align: center; margin-bottom: 30px; border-bottom: 1px solid #eee; padding-bottom: 20px; }
+        .header h2 { color: #003366; margin: 0; font-size: 24px; text-transform: uppercase; }
+        .header p { color: #666; margin: 5px 0 0; font-size: 14px; }
+        .section-title { background: #f8f9fa; color: #003366; padding: 12px 15px; border-radius: 5px; font-size: 18px; font-weight: bold; margin: 30px 0 15px 0; border-left: 5px solid #003366; }
+        .grid { display: grid; grid-template-columns: 1fr; gap: 20px; }
+        @media (min-width: 600px) { .grid { grid-template-columns: 1fr 1fr; } }
+        .input-group { margin-bottom: 15px; }
+        label { display: block; margin-bottom: 8px; font-weight: 600; font-size: 13px; color: #333; text-align: left; }
+        input, select, textarea { width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 8px; box-sizing: border-box; font-size: 14px; }
+        .full-width { grid-column: 1 / -1; }
+        
+        /* Hide Countries Box by Default */
+        #countries_container { display: none; }
+
+        .visa-checkbox-grid { display: grid; grid-template-columns: 1fr; gap: 10px; background: #fafafa; padding: 15px; border: 1px solid #ddd; border-radius: 8px; }
+        @media (min-width: 600px) { .visa-checkbox-grid { grid-template-columns: 1fr 1fr; } }
+        .checkbox-item { display: flex; align-items: center; gap: 10px; font-size: 13px; cursor: pointer; }
+        .checkbox-item input { width: 18px; height: 18px; cursor: pointer; }
+
+        .declaration-box { grid-column: 1 / -1; margin-top: 30px; padding: 20px; background: #fff9e6; border-radius: 8px; font-size: 14px; display: flex; align-items: center; gap: 15px; border: 1px solid #ffeeba; width: 100%; box-sizing: border-box; }
+        .declaration-box input[type="checkbox"] { width: 20px; height: 20px; cursor: pointer; }
+
+        .submit-btn { width: 100%; padding: 18px; background-color: #003366; color: white; border: none; border-radius: 8px; font-size: 18px; font-weight: bold; cursor: pointer; margin-top: 25px; transition: 0.3s ease; }
+        .submit-btn:disabled { background-color: #cccccc; }
+        
+        .modal-overlay { display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); backdrop-filter: blur(5px); }
+        .modal-box { background: white; margin: 15% auto; padding: 40px; border-radius: 15px; width: 85%; max-width: 400px; text-align: center; animation: slideIn 0.3s ease-out; }
+        @keyframes slideIn { from { transform: translateY(-30px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+        .success-icon { font-size: 60px; color: #25D366; margin-bottom: 20px; }
+    </style>
+</head>
+<body>
+
+<div class="form-container">
+    <div class="logo-container"><img src="logo2.png" alt="NorthGate Logo"></div>
+    <div class="header">
+        <p><strong>U.S VISA APPLICANT FORM</strong></p>
+    </div>
+
+    <form id="visaForm">
+        <div class="section-title">👤 Applicant Details</div>
+        <div class="grid">
+            <div class="input-group"><label>Full Name (as per Passport) *</label><input type="text" name="full_name" id="full_name" required></div>
+            <div class="input-group"><label>Father’s / Husband’s Name *</label><input type="text" name="father_name" id="father_name" required></div>
+            <div class="input-group"><label>Date of Birth *</label><input type="date" name="dob" id="dob" required></div>
+            <div class="input-group"><label>CNIC / Passport No *</label><input type="text" name="passport" id="passport" required></div>
+            <div class="input-group"><label>Contact Number *</label><input type="text" name="contact" id="contact" required></div>
+            <div class="input-group"><label>Email Address *</label><input type="email" name="email_id" id="email_id" required></div>
+        </div>
+
+        <div class="section-title">✈️ Travel Information</div>
+        <div class="grid">
+            <div class="input-group">
+                <label>Purpose of Travel *</label>
+                <select name="purpose" id="purpose" required>
+                    <option value="">Select</option>
+                    <option value="Visit/tourist/pleasure">Visit/tourist/pleasure</option>
+                    <option value="Student">Student</option>
+                    <option value="Trainee Exchange Program">Trainee Exchange Program</option>
+                    <option value="Work">Work</option>
+                    <option value="Event">Event</option>
+                    <option value="Business Meeting">Business Meeting</option>
+                    <option value="Medical">Medical</option>
+                </select>
+            </div>
+            <div class="input-group"><label>Intended Travel Date</label><input type="date" name="travel_date" id="travel_date"></div>
+            <div class="input-group"><label>Duration of Stay</label><input type="text" name="duration" id="duration" placeholder="e.g. 15 Days"></div>
+            <div class="input-group"><label>Intended City/State in USA</label><input type="text" name="usa_city" id="usa_city"></div>
+        </div>
+
+        <div class="section-title">🌍 Travel History</div>
+        <div class="grid">
+            <div class="input-group full-width">
+                <label>Have you travelled internationally before? *</label>
+                <select name="intl_travel" id="intl_travel" onchange="toggleCountries()" required>
+                    <option value="No">No</option>
+                    <option value="Yes">Yes</option>
+                </select>
+            </div>
+
+            <div class="input-group full-width" id="countries_container">
+                <label>Countries Visited</label>
+                <textarea name="countries_visited" id="countries_visited" rows="2" placeholder="e.g. Turkey, UAE, UK"></textarea>
+            </div>
+            
+            <div class="input-group full-width">
+                <label>Previous U.S. Visa Details (Tick all that apply)</label>
+                <div class="visa-checkbox-grid">
+                    <label class="checkbox-item"><input type="checkbox" name="visa_type" value="B1 Business purpose"> B1 Business purpose</label>
+                    <label class="checkbox-item"><input type="checkbox" name="visa_type" value="B2 Pleasure purpose"> B2 Pleasure purpose</label>
+                    <label class="checkbox-item"><input type="checkbox" name="visa_type" value="B1/B2 Business and pleasure"> B1/B2 Business and pleasure</label>
+                    <label class="checkbox-item"><input type="checkbox" name="visa_type" value="F1 Student"> F1 Student</label>
+                    <label class="checkbox-item"><input type="checkbox" name="visa_type" value="M1 Non-Academic Student"> M1 Non-Academic Student</label>
+                    <label class="checkbox-item"><input type="checkbox" name="visa_type" value="J1 Trainee Exchange"> J1 Trainee Exchange</label>
+                    <label class="checkbox-item"><input type="checkbox" name="visa_type" value="H-1b special occupation"> H-1b special occupation</label>
+                    <label class="checkbox-item"><input type="checkbox" name="visa_type" value="H-2b skilled/non-skilled workers"> H-2b skilled/non-skilled workers</label>
+                    <label class="checkbox-item"><input type="checkbox" name="visa_type" value="H-2a seasonal and Agricultural worker"> H-2a seasonal and Agricultural worker</label>
+                    <label class="checkbox-item"><input type="checkbox" name="visa_type" value="H-3 training purpose"> H-3 training purpose</label>
+                    <label class="checkbox-item"><input type="checkbox" name="visa_type" value="L- Blanket / L- Non Blanket"> L- Blanket / L- Non Blanket</label>
+                    <label class="checkbox-item"><input type="checkbox" name="visa_type" value="O extra-ordinary ability"> O extra-ordinary ability</label>
+                    <label class="checkbox-item"><input type="checkbox" name="visa_type" value="P1/P2/P3"> P1/P2/P3</label>
+                    <label class="checkbox-item"><input type="checkbox" name="visa_type" value="Q internationally cultural exchange visitors visa"> Q internationally cultural exchange visitors visa</label>
+                     <label class="checkbox-item"><input type="checkbox" name="visa_type" value="None"> None</label>
+                </div>
+            </div>
+        </div>
+
+        <div class="section-title">👨‍👩‍👧 Family Information</div>
+        <div class="grid">
+            <div class="input-group">
+                <label>Marital Status *</label>
+                <select name="marital_status" id="marital_status" required>
+                    <option value="">Select</option>
+                    <option value="Single">Single</option>
+                    <option value="Married">Married</option>
+                    <option value="Divorced">Divorced</option>
+                    <option value="Widowed">Widowed</option>
+                </select>
+            </div>
+            <div class="input-group"><label>Number of Dependents *</label><input type="number" name="dependents" id="dependents" required></div>
+            <div class="input-group"><label>Spouse Name (if applicable):</label><input type="text" name="spouse_name" id="spouse_name"></div>
+            <div class="input-group full-width"><label>Children Details (if any):</label><textarea name="children_details" id="children_details" rows="2" placeholder="Names and ages of children"></textarea></div>
+        </div>
+
+        <div class="section-title">💼 Employment / Financial Details</div>
+        <div class="grid">
+            <div class="input-group"><label>Occupation / Business: *</label><input type="text" name="occupation" id="occupation" required></div>
+            <div class="input-group"><label>Company Name: *</label><input type="text" name="company_name" id="company_name" required></div>
+            <div class="input-group"><label>Monthly Income: *</label><input type="text" name="income" id="income" required></div>
+            <div class="input-group"><label>Sponsor Details (if any): *</label><input type="text" name="sponsor" id="sponsor" required></div>
+            
+            <div class="declaration-box">
+                <input type="checkbox" id="agree" required>
+                <label for="agree">I hereby declare that all the above information provided is true and accurate to the best of my knowledge.</label>
+            </div>
+        </div>
+
+        <button type="submit" id="submitBtn" class="submit-btn">SUBMIT APPLICATION</button>
+    </form>
+</div>
+
+<div id="thankYouModal" class="modal-overlay">
+    <div class="modal-box">
+        <div class="success-icon">✔</div>
+        <h2 style="color:#003366;">Submitted!</h2>
+        <p>Your details have been saved successfully. We will contact you soon.</p>
+        <button class="submit-btn" onclick="window.location.reload()">Fill New Form</button>
+    </div>
+</div>
+
+<script>
+    const scriptURL = 'exec';
+    const form = document.getElementById('visaForm');
+    const btn = document.getElementById('submitBtn');
+
+    // Yes/No logic for Countries Visited
+    function toggleCountries() {
+        const status = document.getElementById('intl_travel').value;
+        const container = document.getElementById('countries_container');
+        if (status === 'Yes') {
+            container.style.display = 'block';
+        } else {
+            container.style.display = 'none';
+            document.getElementById('countries_visited').value = ''; // Reset if hidden
+        }
+    }
+
+    form.addEventListener('submit', e => {
+        e.preventDefault();
+        btn.disabled = true;
+        btn.innerHTML = "Sending... Please Wait";
+
+        const checkboxes = document.querySelectorAll('input[name="visa_type"]:checked');
+        let selectedVisas = Array.from(checkboxes).map(cb => cb.value).join(", ");
+        if (selectedVisas === "") selectedVisas = "None";
+
+        const formData = new FormData(form);
+        const params = new URLSearchParams(formData);
+        params.set('prev_visa', selectedVisas);
+
+        fetch(scriptURL + "?" + params.toString(), { method: 'GET', mode: 'no-cors' })
+        .then(() => {
+            document.getElementById('thankYouModal').style.display = 'block';
+            form.reset();
+            btn.disabled = false;
+            btn.innerHTML = "SUBMIT APPLICATION";
+        })
+        .catch(() => {
+            document.getElementById('thankYouModal').style.display = 'block';
+            form.reset();
+        });
+    });
+</script>
+
+</body>
+</html>
