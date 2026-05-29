@@ -55,7 +55,6 @@
     </div>
 
     <form id="visaForm">
-        <!-- FIXED CONNECTOR: Taake system pehchan sake ke data 'U.S' tab me jana hai -->
         <input type="hidden" name="form_type" value="US">
 
         <div class="section-title">👤 Applicant Details</div>
@@ -159,7 +158,6 @@
     </form>
 </div>
 
-<!-- Modal Popup Box with correct blue theme and Live Home Page link -->
 <div id="thankYouModal" class="modal-overlay">
     <div class="modal-box">
         <div class="success-icon">✔</div>
@@ -174,12 +172,11 @@
 </div>
 
 <script>
-    // Is script URL ko apne centralized multi-tab deployment link se badal dijiyega
-    const scriptURL = 'https://script.google.com/macros/s/AKfycbwRS74xWfnYK-5tPEUosxFkRl9rDReHfyIVSiZwoUli-888EAXVW6OquQMA2tNpu7C0qA/exec';
+    // FIXED URL PATH METHOD: Strict explicit endpoint parameter
+    const scriptURL = 'https://script.google.com/macros/s/AKfycbwRS74xWfnYK-5tPEUosxFkRl9rDReHfyIVSiZwoUli-888EAXVW6OquQMA2tNpu7C0qA/exec?form_type=US';
     const form = document.getElementById('visaForm');
     const btn = document.getElementById('submitBtn');
 
-    // Yes/No logic for Countries Visited
     function toggleCountries() {
         const status = document.getElementById('intl_travel').value;
         const container = document.getElementById('countries_container');
@@ -187,7 +184,7 @@
             container.style.display = 'block';
         } else {
             container.style.display = 'none';
-            document.getElementById('countries_visited').value = ''; // Reset if hidden
+            document.getElementById('countries_visited').value = '';
         }
     }
 
